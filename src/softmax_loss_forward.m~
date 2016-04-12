@@ -1,0 +1,7 @@
+function [loss, X_hat] = softmax_loss_forward(X, Y)
+
+max_X = repmat(max(X), size(X, 1), 1);
+X_hat = exp(X - max_X);
+
+X_hat = X_hat./repmat(sum(X_hat), size(X_hat, 1), 1);
+loss = -sum(sum(Y.*log(X_hat)))./numel(X);
